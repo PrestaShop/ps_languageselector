@@ -39,7 +39,7 @@ class BlockLanguages extends Module
 
 		parent::__construct();
 
-		$this->displayName = $this->l('Language block');
+		$this->displayName = $this->l('Language selector block');
 		$this->description = $this->l('Adds a block allowing customers to select a language for your store\'s content.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
