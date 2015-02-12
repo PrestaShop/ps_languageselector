@@ -49,7 +49,7 @@ class BlockLanguages extends Module
 		return (parent::install() && $this->registerHook('displayNav') && $this->registerHook('displayHeader'));
 	}
 
-	private function _prepareHook($params)
+	protected function _prepareHook($params)
 	{
 		$languages = Language::getLanguages(true, $this->context->shop->id);
 		if (!count($languages))
