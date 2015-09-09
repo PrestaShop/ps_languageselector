@@ -23,11 +23,11 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<ul class="language-selector">
+<ul class="language-selector" data-current-language-name="{$current_language.name}">
   {foreach from=$languages item=language}
     <li>
       <a href="{$link->getLanguageLink($language.id_lang)}"
-        {if $language.id_lang == $current_language_id} class="current" {/if}
+        {if $language.id_lang == $current_language.id_lang} class="current" {/if}
       >{$language.name}</a>
     </li>
   {/foreach}

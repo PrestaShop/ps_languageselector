@@ -61,7 +61,10 @@ class BlockLanguages extends Module
 
 		$this->context->smarty->assign([
 			'languages' => $languages,
-			'current_language_id' => $this->context->language->id
+			'current_language' => [
+				'id_lang' => $this->context->language->id,
+				'name' => $this->context->language->name
+			]
 		]);
 
 		return $this->display(__FILE__, 'blocklanguages.tpl');
