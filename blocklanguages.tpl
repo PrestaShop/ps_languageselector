@@ -22,13 +22,13 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-
-<ul class="language-selector">
-  {foreach from=$languages item=language}
-    <li>
-      <a href="{$link->getLanguageLink($language.id_lang)}"
-        {if $language.id_lang == $current_language_id} class="current" {/if}
-      >{$language.name}</a>
-    </li>
-  {/foreach}
-</ul>
+<div class="language-selector">
+  <span>{$current_language.name}</span>
+  <ul>
+    {foreach from=$languages item=language}
+      <li {if $language.id_lang == $current_language.id_lang} class="current" {/if}>
+        <a href="{$link->getLanguageLink($language.id_lang)}">{$language.name}</a>
+      </li>
+    {/foreach}
+  </ul>
+</div>

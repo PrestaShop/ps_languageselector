@@ -27,7 +27,9 @@
 if (!defined('_PS_VERSION_'))
 	exit;
 
-class BlockLanguages extends Module
+use PrestaShop\PrestaShop\Core\Business\Module\WidgetInterface;
+
+class BlockLanguages extends Module implements WidgetInterface
 {
 	public function __construct()
 	{
@@ -44,31 +46,22 @@ class BlockLanguages extends Module
 		$this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
 	}
 
-	public function install()
+	public function renderWidget($hookName = null, array $configuration = [])
 	{
-		return (parent::install() && $this->registerHook('displayNav'));
-	}
-
-	/**
-	* Returns module content for header
-	*
-	* @param array $params Parameters
-	* @return string Content
-	*/
-	public function hookDisplayTop($params)
-	{
-		$languages = Language::getLanguages(true, $this->context->shop->id);
-
-		$this->context->smarty->assign([
-			'languages' => $languages,
-			'current_language_id' => $this->context->language->id
-		]);
-
+		$this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
 		return $this->display(__FILE__, 'blocklanguages.tpl');
 	}
 
-	public function hookDisplayNav($params)
+    public function getWidgetVariables($hookName = null, array $configuration = [])
 	{
-		return $this->hookDisplayTop($params);
+		$languages = Language::getLanguages(true, $this->context->shop->id);
+
+		return [
+			'languages' => $languages,
+			'current_language' => [
+				'id_lang' => $this->context->language->id,
+				'name' => $this->context->language->name
+			]
+		];
 	}
 }
