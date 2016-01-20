@@ -57,12 +57,22 @@ class BlockLanguages extends Module implements WidgetInterface
     {
         $languages = Language::getLanguages(true, $this->context->shop->id);
 
+        foreach ($languages as &$lang) {
+            $lang['name_simple'] = $this->getNameSimple($lang['name']);
+        }
+
         return [
             'languages' => $languages,
             'current_language' => [
                 'id_lang' => $this->context->language->id,
-                'name' => $this->context->language->name
+                'name' => $this->context->language->name,
+                'name_simple' => $this->getNameSimple($this->context->language->name)
             ]
         ];
+    }
+
+    private function getNameSimple($name)
+    {
+        return preg_replace('/\s\(.*\)$/', '', $name);
     }
 }
