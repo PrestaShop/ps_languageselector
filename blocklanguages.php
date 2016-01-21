@@ -24,44 +24,55 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-if (!defined('_PS_VERSION_'))
-	exit;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
 class BlockLanguages extends Module implements WidgetInterface
 {
-	public function __construct()
-	{
-		$this->name = 'blocklanguages';
-		$this->tab = 'front_office_features';
-		$this->version = '2.0.0';
-		$this->author = 'PrestaShop';
-		$this->need_instance = 0;
+    public function __construct()
+    {
+        $this->name = 'blocklanguages';
+        $this->tab = 'front_office_features';
+        $this->version = '2.0.0';
+        $this->author = 'PrestaShop';
+        $this->need_instance = 0;
 
-		parent::__construct();
+        parent::__construct();
 
-		$this->displayName = $this->l('Language selector block');
-		$this->description = $this->l('Adds a block allowing customers to select a language for your store\'s content.');
-		$this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
-	}
+        $this->displayName = $this->l('Language selector block');
+        $this->description = $this->l('Adds a block allowing customers to select a language for your store\'s content.');
+        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+    }
 
-	public function renderWidget($hookName = null, array $configuration = [])
-	{
-		$this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-		return $this->display(__FILE__, 'blocklanguages.tpl');
-	}
+    public function renderWidget($hookName = null, array $configuration = [])
+    {
+        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+        return $this->display(__FILE__, 'blocklanguages.tpl');
+    }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
-	{
-		$languages = Language::getLanguages(true, $this->context->shop->id);
+    {
+        $languages = Language::getLanguages(true, $this->context->shop->id);
 
-		return [
-			'languages' => $languages,
-			'current_language' => [
-				'id_lang' => $this->context->language->id,
-				'name' => $this->context->language->name
-			]
-		];
-	}
+        foreach ($languages as &$lang) {
+            $lang['name_simple'] = $this->getNameSimple($lang['name']);
+        }
+
+        return [
+            'languages' => $languages,
+            'current_language' => [
+                'id_lang' => $this->context->language->id,
+                'name' => $this->context->language->name,
+                'name_simple' => $this->getNameSimple($this->context->language->name)
+            ]
+        ];
+    }
+
+    private function getNameSimple($name)
+    {
+        return preg_replace('/\s\(.*\)$/', '', $name);
+    }
 }
