@@ -30,13 +30,13 @@ if (!defined('_PS_VERSION_')) {
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
-class BlockLanguages extends Module implements WidgetInterface
+class Ps_Languageselector extends Module implements WidgetInterface
 {
     public function __construct()
     {
-        $this->name = 'blocklanguages';
+        $this->name = 'ps_languageselector';
         $this->tab = 'front_office_features';
-        $this->version = '2.0.0';
+        $this->version = '1.0.0';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -50,7 +50,7 @@ class BlockLanguages extends Module implements WidgetInterface
     public function renderWidget($hookName = null, array $configuration = [])
     {
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        return $this->display(__FILE__, 'blocklanguages.tpl');
+        return $this->display(__FILE__, 'ps_languageselector.tpl');
     }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
