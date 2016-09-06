@@ -49,6 +49,9 @@ class Ps_Languageselector extends Module implements WidgetInterface
 
     public function renderWidget($hookName = null, array $configuration = [])
     {
+        if (1 >= count(Language::getLanguages(true, $this->context->shop->id))) {
+            return '';
+        }
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
         return $this->display(__FILE__, 'ps_languageselector.tpl');
     }
