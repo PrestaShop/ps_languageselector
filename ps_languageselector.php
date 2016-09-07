@@ -44,7 +44,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
 
         $this->displayName = $this->l('Language selector block');
         $this->description = $this->l('Adds a block allowing customers to select a language for your store\'s content.');
-        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function renderWidget($hookName = null, array $configuration = [])
