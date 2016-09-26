@@ -53,7 +53,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
             return '';
         }
         $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        return $this->display(__FILE__, 'ps_languageselector.tpl');
+        return $this->fetch('module:ps_languageselector/ps_languageselector.tpl', $this->getCacheId());
     }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
