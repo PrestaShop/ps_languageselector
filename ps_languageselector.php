@@ -32,28 +32,39 @@ use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
 class Ps_Languageselector extends Module implements WidgetInterface
 {
+    private $templateFile;
+
     public function __construct()
     {
         $this->name = 'ps_languageselector';
-        $this->tab = 'front_office_features';
-        $this->version = '1.0.3';
         $this->author = 'PrestaShop';
+        $this->version = '1.0.3';
         $this->need_instance = 0;
 
         parent::__construct();
 
-        $this->displayName = $this->l('Language selector block');
-        $this->description = $this->l('Adds a block allowing customers to select a language for your store\'s content.');
+        $this->displayName = $this->trans('Language selector block', array(), 'Modules.Languageselector.Admin');
+        $this->description = $this->trans('Adds a block allowing customers to select a language for your store\'s content.', array(), 'Modules.Languageselector.Admin');
+
         $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
+
+        $this->templateFile = 'module:ps_languageselector/ps_languageselector.tpl';
     }
 
     public function renderWidget($hookName = null, array $configuration = [])
     {
-        if (1 >= count(Language::getLanguages(true, $this->context->shop->id))) {
-            return '';
+        $languages = Language::getLanguages(true, $this->context->shop->id);
+
+        if (!empty($languages)) {
+
+            if (!$this->isCached($this->templateFile, $this->getCacheId('ps_languageselector'))) {
+                $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+            }
+
+            return $this->fetch($this->templateFile, $this->getCacheId('ps_languageselector'));
         }
-        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        return $this->fetch('module:ps_languageselector/ps_languageselector.tpl', $this->getCacheId());
+
+        return false;
     }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
@@ -64,14 +75,14 @@ class Ps_Languageselector extends Module implements WidgetInterface
             $lang['name_simple'] = $this->getNameSimple($lang['name']);
         }
 
-        return [
+        return array(
             'languages' => $languages,
-            'current_language' => [
+            'current_language' => array(
                 'id_lang' => $this->context->language->id,
                 'name' => $this->context->language->name,
                 'name_simple' => $this->getNameSimple($this->context->language->name)
-            ]
-        ];
+            )
+        );
     }
 
     private function getNameSimple($name)
