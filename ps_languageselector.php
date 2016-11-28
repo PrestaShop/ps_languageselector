@@ -56,12 +56,9 @@ class Ps_Languageselector extends Module implements WidgetInterface
         $languages = Language::getLanguages(true, $this->context->shop->id);
 
         if (1 < count($languages)) {
-
-            if (!$this->isCached($this->templateFile, $this->getCacheId('ps_languageselector'))) {
-                $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-            }
-
-            return $this->fetch($this->templateFile, $this->getCacheId('ps_languageselector'));
+            $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+            
+            return $this->fetch($this->templateFile);
         }
 
         return false;
