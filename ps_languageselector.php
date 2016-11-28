@@ -38,7 +38,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
     {
         $this->name = 'ps_languageselector';
         $this->author = 'PrestaShop';
-        $this->version = '1.0.5';
+        $this->version = '1.0.6';
         $this->need_instance = 0;
 
         parent::__construct();
