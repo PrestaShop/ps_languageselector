@@ -68,8 +68,12 @@ class Ps_Languageselector extends Module implements WidgetInterface
     {
         $languages = Language::getLanguages(true, $this->context->shop->id);
 
-        foreach ($languages as &$lang) {
-            $lang['name_simple'] = $this->getNameSimple($lang['name']);
+        foreach ($languages as $k => &$lang) {
+            if ('en-UD' === $lang['locale']) {
+                unset($languages[$k]);
+            } else {
+                $lang['name_simple'] = $this->getNameSimple($lang['name']);
+            }
         }
 
         return array(
