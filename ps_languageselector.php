@@ -70,7 +70,6 @@ class Ps_Languageselector extends Module implements WidgetInterface
 
         foreach ($languages as &$lang) {
             $lang['name_simple'] = $this->getNameSimple($lang['name']);
-            $lang['iso_code'] = $lang['iso_code'];
         }
 
         return array(
