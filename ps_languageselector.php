@@ -77,7 +77,8 @@ class Ps_Languageselector extends Module implements WidgetInterface
             'current_language' => array(
                 'id_lang' => $this->context->language->id,
                 'name' => $this->context->language->name,
-                'name_simple' => $this->getNameSimple($this->context->language->name)
+                'name_simple' => $this->getNameSimple($this->context->language->name),
+                'iso_code' => $this->context->language->iso_code
             )
         );
     }
