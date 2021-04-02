@@ -23,7 +23,6 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -48,10 +47,10 @@ class Ps_Languageselector extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = $this->trans('Language selector block', array(), 'Modules.Languageselector.Admin');
-        $this->description = $this->trans('Go further international and display a language selector in the header of your store so that customers can shop in their own language.', array(), 'Modules.Languageselector.Admin');
+        $this->displayName = $this->trans('Language selector block', [], 'Modules.Languageselector.Admin');
+        $this->description = $this->trans('Go further international and display a language selector in the header of your store so that customers can shop in their own language.', [], 'Modules.Languageselector.Admin');
 
-        $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
 
         $this->templateFile = 'module:ps_languageselector/ps_languageselector.tpl';
     }
@@ -90,15 +89,15 @@ class Ps_Languageselector extends Module implements WidgetInterface
             $lang['name_simple'] = $this->getNameSimple($lang['name']);
         }
 
-        return array(
+        return [
             'languages' => $languages,
-            'current_language' => array(
+            'current_language' => [
                 'id_lang' => $this->context->language->id,
                 'name' => $this->context->language->name,
                 'name_simple' => $this->getNameSimple($this->context->language->name),
-                'iso_code' => $this->context->language->iso_code
-            )
-        );
+                'iso_code' => $this->context->language->iso_code,
+            ],
+        ];
     }
 
     private function getNameSimple($name)
