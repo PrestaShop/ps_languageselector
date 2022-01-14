@@ -41,6 +41,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
     public function __construct()
     {
         $this->name = 'ps_languageselector';
+        $this->tab = 'front_office_features';
         $this->author = 'PrestaShop';
         $this->version = '2.1.0';
         $this->need_instance = 0;
