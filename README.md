@@ -2,7 +2,7 @@
 
 ## About
 
-Adds a block allowing customers to select a language for your store\'s content.
+Go further international and display a language selector in the header of your store so that customers can shop in their own language.
 
 ## Reporting issues
 
