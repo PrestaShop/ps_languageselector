@@ -49,7 +49,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
         parent::__construct();
 
         $this->displayName = $this->trans('Language selector block', [], 'Modules.Languageselector.Admin');
-        $this->description = $this->trans('Go further international and display a language selector in the header of your store so that customers can shop in their own language.', [], 'Modules.Languageselector.Admin');
+        $this->description = $this->trans('Go international and display a language selector in the header of your store so that customers can shop in their own language.', [], 'Modules.Languageselector.Admin');
 
         $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
 
