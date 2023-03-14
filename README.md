@@ -2,7 +2,7 @@
 
 ## About
 
-Go further international and display a language selector in the header of your store so that customers can shop in their own language.
+Go international and display a language selector in the header of your store so that customers can shop in their own language.
 
 ## Reporting issues
 
