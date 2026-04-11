@@ -74,7 +74,7 @@ class Ps_Languageselector extends Module implements WidgetInterface
         $languages = Language::getLanguages(true, $this->context->shop->id);
 
         if (1 < count($languages)) {
-            $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+            $this->smarty->assign($this->getWidgetVariables($hookName, $configuration, $languages));
 
             return $this->fetch($this->templateFile);
         }
@@ -82,10 +82,8 @@ class Ps_Languageselector extends Module implements WidgetInterface
         return false;
     }
 
-    public function getWidgetVariables($hookName = null, array $configuration = [])
+    public function getWidgetVariables($hookName = null, array $configuration = [], $languages = [])
     {
-        $languages = Language::getLanguages(true, $this->context->shop->id);
-
         foreach ($languages as &$lang) {
             $lang['name_simple'] = $this->getNameSimple($lang['name']);
         }
